@@ -23,8 +23,8 @@ export class StudentComponent implements OnInit {
   getStudents() {
     this.dataService.getRecords("student")
       .subscribe(
-        students => this.students = students,
-        error =>  this.errorMessage = <any>error);
+        students => this.students = students,   //handles success
+        error =>  this.errorMessage = <any>error);  //handles error
   }
 
   deleteStudent(id:number) {

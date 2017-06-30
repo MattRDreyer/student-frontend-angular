@@ -9,32 +9,32 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
-    private baseUrl = 'http://localhost:1337/'
+    private baseUrl = 'http://localhost:1337/'  //bring in jeopardy api
 
-    constructor (private http: Http) {}
+    constructor (private http: Http) {}  
 
-    getRecords(endpoint: string): Observable<any[]> {
+    getRecords(endpoint: string): Observable<any[]> {  // might only have getrandom ?
         let apiUrl = this.baseUrl+endpoint;
         return this.http.get(apiUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+            .map(this.extractData)  //how to map data from API
+            .catch(this.handleError);  // how to handle if it messes up
     }
 
-    getRecord(endpoint: string, id): Observable<object> {
+    getRecord(endpoint: string, id): Observable<object> {  //modified to get a specific id
         let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
         return this.http.get(apiUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    deleteRecord(endpoint: string, id:number): Observable<object> {
+    deleteRecord(endpoint: string, id:number): Observable<object> { //similar, but deletes
         let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
         return this.http.delete(apiUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    editRecord(endpoint: string, record:object, id:number): Observable<object> {
+    editRecord(endpoint: string, record:object, id:number): Observable<object> { //little different but edits only
         let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
         console.log(record)
         console.log(apiUrl)
@@ -48,7 +48,7 @@ export class DataService {
         console.log(apiUrl)
         return this.http.post(apiUrl, record)
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError);  //could be removed for jeopardy as there are little errors
     }
 
 
